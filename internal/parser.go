@@ -128,6 +128,12 @@ func ParseString(s string) string {
 						color = color[1:]
 					}
 
+					var background_tag bool
+					if strings.Contains(sub_tag, "b;") {
+						sub_tag = strings.ReplaceAll(sub_tag, "b;", "")
+						background_tag = true
+					}
+
 					rgb_color, err := NewColorFromHex(sub_tag)
 					if err != nil {
 						fmt.Println(err, `Codigo de linea: 8f2cc96b-1391-4a86-88b5-03ed2f58a789`)
@@ -135,6 +141,9 @@ func ParseString(s string) string {
 					}
 
 					ansi_code := fmt.Sprintf("\x1b[38;2;%d;%d;%dm", rgb_color.R, rgb_color.B, rgb_color.G)
+					if background_tag {
+						ansi_code = fmt.Sprintf("\x1b[48;2;%d;%d;%dm", rgb_color.R, rgb_color.B, rgb_color.G)
+					}
 
 					// Replace colors
 					combined_tag += ansi_code
