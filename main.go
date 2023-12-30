@@ -50,7 +50,6 @@ Adding colors to your print statements not only improves visual representation b
 he displayed information.
 */
 func Cprintln(a ...interface{}) (int, error) {
-	fmt.Println()
 	return Cprintf("%s\n", a...)
 }
 
