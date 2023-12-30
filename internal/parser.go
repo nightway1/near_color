@@ -75,7 +75,7 @@ func ParseString(s string) string {
 				os.Exit(2)
 			}
 
-			ansi_code := fmt.Sprintf("\x1b[38;2;%d;%d;%dm", rgb_color.R, rgb_color.B, rgb_color.G)
+			ansi_code := fmt.Sprintf("\x1b[38;2;%d;%d;%dm", rgb_color.R, rgb_color.G, rgb_color.B)
 
 			// Replace colors
 			s = strings.ReplaceAll(s, tag, ansi_code)
