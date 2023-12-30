@@ -20,7 +20,7 @@ Integrating colors into your formatted print statements can enhance the visual a
 func Cprintf(format string, a ...interface{}) (int, error) {
 	var output string
 	for _, v := range a {
-		output += v.(string) + " "
+		output += fmt.Sprint(v)
 	}
 
 	return fmt.Printf(internal.ParseString(format), internal.ParseString(output))
@@ -62,7 +62,7 @@ Additionally, you can enhance the visual presentation by incorporating style for
 func Csprintf(format string, a ...interface{}) string {
 	var output string
 	for _, v := range a {
-		output += v.(string) + " "
+		output += fmt.Sprint(v)
 	}
 
 	return fmt.Sprintf(internal.ParseString(format), internal.ParseString(output))
@@ -72,7 +72,7 @@ func Csprintf(format string, a ...interface{}) string {
 Sprint formats using the default formats for its operands and returns the resulting string. S
 paces are added between operands when neither is a string. Consider utilizing ANSI escape codes for basic color formatting.
 */
-func Csprint(a ...any) string {
+func Csprint(a ...interface{}) string {
 	return Csprintf("%s", a...)
 }
 
@@ -80,7 +80,7 @@ func Csprint(a ...any) string {
 Sprintln formats using the default formats for its operands and returns the resulting string.
 Spaces are always added between operands, and a newline is appended.
 */
-func Csprintln(a ...any) string {
+func Csprintln(a ...interface{}) string {
 	fmt.Sprintln()
 	return Csprintf("%s\n", a...)
 }
